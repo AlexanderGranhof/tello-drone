@@ -4,7 +4,7 @@ const dgram = require("dgram");
 module.exports = {
     /**
      * Connects to the drone and returns a new Drone object
-     * @param {Object} config - the config object
+     * @param {Object} config - The optional config object
      * @param {String} config.host - The IP of the Tello drone
      * @param {(String | Number)} config.port - The port of the UDP communication
      * @param {(String | Number)} config.statePort - The port of the UDP state communication
@@ -34,7 +34,7 @@ function parseDroneState(state) {
 /**
  * A factory function that creates a new tello drone connection and returns a new object.
  * All options are optional
- * @param {Object} config - the config object
+ * @param {Object} config - The optional config object
  * @param {String} config.host - The IP of the Tello drone
  * @param {(String | Number)} config.port - The port of the UDP communication
  * @param {(String | Number)} config.statePort - The port of the UDP state communication
@@ -82,6 +82,8 @@ function Drone({ host = "192.168.10.1", port = "8889", statePort = "8890", buffe
 
     /**
      * Attaches a callback function to an event
+     * @param {String} event - The event name
+     * @param {Function} callback - The callback function
      */
     this.on = (event, callback) => {
         this.events.attach(event, callback);
