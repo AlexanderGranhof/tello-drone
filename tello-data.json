@@ -18,7 +18,6 @@
         "speed?": 500,
         "time?": 500
     },
-
     "validCommands": {
         "control": [
             "command",
@@ -39,9 +38,19 @@
             "go",
             "curve"
         ],
-
-        "set": ["speed", "rc", "wifi"],
-        "read": ["speed?", "battery?", "time?", "wifi?", "sdk?", "sn?"],
+        "set": [
+            "speed",
+            "rc",
+            "wifi"
+        ],
+        "read": [
+            "speed?",
+            "battery?",
+            "time?",
+            "wifi?",
+            "sdk?",
+            "sn?"
+        ],
         "all": [
             "command",
             "takeoff",
@@ -71,7 +80,6 @@
             "sn?"
         ]
     },
-
     "commandLimits": {
         "up": {
             "value": {
@@ -79,131 +87,114 @@
                 "max": 500
             }
         },
-
         "down": {
             "value": {
                 "min": 20,
                 "max": 500
             }
         },
-
         "left": {
             "value": {
                 "min": 20,
                 "max": 500
             }
         },
-
         "right": {
             "value": {
                 "min": 20,
                 "max": 500
             }
         },
-
         "forward": {
             "value": {
                 "min": 20,
                 "max": 500
             }
         },
-
         "back": {
             "value": {
                 "min": 20,
                 "max": 500
             }
         },
-
         "cw": {
             "value": {
                 "min": 1,
                 "max": 360
             }
         },
-
         "ccw": {
             "value": {
                 "min": 1,
                 "max": 360
             }
         },
-
         "flip": {
-            "value": ["l", "r", "f", "b"]
+            "value": [
+                "l",
+                "r",
+                "f",
+                "b"
+            ]
         },
-
         "go": {
             "x": {
                 "min": -500,
                 "max": 500
             },
-
             "y": {
                 "min": -500,
                 "max": 500
             },
-
             "z": {
                 "min": -500,
                 "max": 500
             },
-
             "speed": {
                 "min": 10,
                 "max": 100
             }
         },
-
         "curve": {
             "x1": {
                 "min": -500,
                 "max": 500
             },
-
             "y1": {
                 "min": -500,
                 "max": 500
             },
-
             "x2": {
                 "min": -500,
                 "max": 500
             },
-
             "y2": {
                 "min": -500,
                 "max": 500
             },
-
             "speed": {
                 "min": 10,
                 "max": 60
             }
         },
-
         "jump": {
             "x": {
                 "min": -500,
                 "max": 500
             },
-
             "y": {
                 "min": -500,
                 "max": 500
             },
-
             "z": {
                 "min": -500,
                 "max": 500
             },
-
             "speed": {
                 "min": 10,
                 "max": 100
             }
         },
-
         "speed": {
             "min": 10,
             "max": 100

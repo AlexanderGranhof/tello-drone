@@ -1,6 +1,6 @@
 {
     "name": "tello-drone",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "description": "A package that wraps around dgram to create a easy to use interface between node.js and a tello drone",
     "main": "index.js",
     "scripts": {
@@ -12,9 +12,12 @@
         "tello-drone",
         "tello-wrapper",
         "dji",
-        "tello",
         "dji-tello"
     ],
     "author": "Alexander Granhof",
-    "license": "ISC"
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/AlexanderGranhof/tello-drone"
+    }
 }
