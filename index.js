@@ -161,7 +161,7 @@ function Drone({
         }
     });
 
-    // this.send("command")
+    this.send("command")
 }
 
 function forceSendSync(command) {
