@@ -10,11 +10,11 @@ function verifyCommand(command, options) {
 
     //Check if the command is valid
     if (!validCommands.all.includes(command)) {
-        return `Invalid command: ${command}`;
+        throw new Error(`invalid command: ${command}`);
     } else if (!options) {
         //If the command is valid but expects options to go along with it
         if (command in commandLimits) {
-            return `Expected an option object along with the command: ${command}`;
+            throw new Error(`Expected an option object along with the command: ${command}`);
         }
 
         return;
@@ -25,14 +25,14 @@ function verifyCommand(command, options) {
     //Check if there are any missing properties in the options object
     for (let prop in commandLimits[command]) {
         if (!(prop in options)) {
-            return `Expected '${prop}' in options but recieved undefined`;
+            throw new Error(`Expected '${prop}' in options but recieved undefined`);
         }
     }
 
     //Check if there are any additional properties in the options object
     for (let prop in options) {
         if (!(prop in commandLimits[command])) {
-            return `Unexpected '${prop}' in options`;
+            throw new Error(`Unexpected '${prop}' in options`);
         }
     }
 
@@ -43,16 +43,16 @@ function verifyCommand(command, options) {
         //Check if the command has a limit on the value from the tello SDK
         if ("max" in limit && "min" in limit) {
             if (!(value <= limit.max && value >= limit.min)) {
-                return `Invalid value ${prop}: ${value}, expected ${prop} to range between ${limit.min}, ${limit.max}`;
+                throw new Error(`invalid value ${prop}: ${value}, expected ${prop} to range between ${limit.min}, ${limit.max}`);
             }
 
             //If the command needs a single value, check if that is passed (stored as an array in tello-data.json)
         } else if (Array.isArray(limit)) {
             if (!limit.includes(value)) {
-                return `Invalid value ${prop}: ${value} expected ${limit}`;
+                throw new Error(`invalid value ${prop}: ${value} expected ${limit}`);
             }
         } else {
-            return `Unexpected: ${[command, prop, options]}`;
+            throw new Error(`Unexpected: ${[command, prop, options]}`);
         }
     }
 
