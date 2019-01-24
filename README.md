@@ -21,15 +21,15 @@ Charging the battery and trying again solves that error issue.
 ```js
 const tello = require("tello-drone");
 
-// All option parameters are optional
+// All option parameters are optional, default values shown
 const drone = tello.connect(
     {
-      async: true,           // makes the send method async. default: false
-      host: "192.168.0.123", // manually set the host        default: "192.168.10.1"
-      port: "3333",          // manually set the port        default: "8889"
-      statePort: "3334",     // manually set the state port  default: "8890"
-      skipOK: true,          // dont send the OK message     default: false
-      bufferOffset: 10       // buffer offset for dgram      default: 0
+      async: false,             // makes the send method async.
+      host: "192.168.10.1",     // manually set the host.
+      port: "8889",             // manually set the port.
+      statePort: "8890",        // manually set the state port.
+      skipOK: false,            // dont send the OK message.
+      bufferOffset: 0           // buffer offset for dgram.
     }
 );
 
@@ -40,13 +40,13 @@ drone.send("battery?")
 drone.forceSend("battery?")
 
 // Attaches a callback to a specific event
-drone.on(/* ... */)
+drone.on(event, callback)
 
 /** All events of the on method
- * connection   - Fired when connected to the drone             Parameters: []
- * state        - Fired when the drone sends its state message  Parameters: [stateObject, udpConnection]
- * send         - Fired when a command is sent                  Parameters: [error, messageLength]
- * message      - Fired when the drone sends a status message   Parameters: [message, udpConnection]
+ * connection   - Fired when connected to the drone.             callback()
+ * state        - Fired when the drone sends its state message.  callback(stateObject, udpConnection)
+ * send         - Fired when a command is sent.                  callback(error, messageLength)
+ * message      - Fired when the drone sends a status message.   callback(message, udpConnection)
  */
 
 
@@ -79,15 +79,18 @@ drone.on("message", message => {
     console.log("Recieved Message > ", message);
 });
 
-(async () => {
+drone.on("connection", async () => {
     try {
         await drone.send("takeoff");
         await drone.send("flip", { value: "f" });
         await drone.send("land");
     } catch (error) {
-        throw new Error(error);
+        console.log(error)
+        drone.send("land")
+        //A short delay so that the land command can be sent before exiting
+        setTimeout(process.exit)
     }
-})();
+});
 ```
 
 # Video demo
