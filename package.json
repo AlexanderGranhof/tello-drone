@@ -1,11 +1,9 @@
 {
     "name": "tello-drone",
     "version": "2.1.0",
-    "description": "A package that wraps around dgram to create a easy to use interface between node.js and a tello drone",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+    "description": "An independent package that provides a simple, easy to use interface between node.js and a tello drone",
+    "main": "lib/index.js",
+    "scripts": {},
     "keywords": [
         "tello",
         "drone",
