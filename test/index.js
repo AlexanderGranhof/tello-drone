@@ -1,5 +1,5 @@
-const assert = require("assert");
-const { parseDroneState } = require("../lib/utility");
+const assert = require("assert").strict;
+const { parseDroneState, verifyCommand, formatCommand } = require("../lib/utility");
 
 describe("tello-drone library", function () {
     it("Can parse a tello state (v???)", function () {
@@ -18,5 +18,53 @@ describe("tello-drone library", function () {
         const actual = parseDroneState(state);
 
         assert.deepEqual(expected, actual);
+    });
+
+    it("Can verify valid and invalid commands", function () {
+        // Valid commands / options
+
+        const noOptionCommands = ["command", "takeoff", "land", "streamon"];
+        const optionCommands = ["up", "down", "ccw", "flip", "curve"];
+        const options = [{ value: 200 }, { value: 50 }, { value: 180 }, { value: "r" }, { x1: 250, y1: 100, x2: 100, y2: 50, speed: 30 }];
+
+        for (const command of noOptionCommands) {
+            assert.equal(verifyCommand(command), undefined);
+        }
+
+        for (let i = 0; i < optionCommands.length; i++) {
+            const command = optionCommands[i];
+            const option = options[i];
+
+            assert.equal(verifyCommand(command, option), undefined);
+        }
+
+        // Invalid commands / args
+
+        const invalidNoOptionCommands = ["im", "not", "a", "validCommand"];
+        const invalidOptions = [{ value: 2000 }, { value: 5000 }, { value: 18000 }, { value: "j" }, { x1: 25000, y1: 10000, x2: 10000, y2: 5000, speed: 3000 }];
+
+        for (const command of invalidNoOptionCommands) {
+            assert.equal(verifyCommand(command) instanceof Error, true);
+        }
+
+        for (let i = 0; i < optionCommands.length; i++) {
+            const command = optionCommands[i];
+            const option = invalidOptions[i];
+
+            assert.equal(verifyCommand(command, option) instanceof Error, true);
+        }
+    });
+
+    it("Can format command with options", function () {
+        const command = "ccw";
+        const options = { x1: 250, y1: 100, x2: 100, y2: 50, speed: 30 };
+
+        const result = formatCommand(command, options);
+
+        assert.equal(result.split(" ").length, 1 + Object.values(options).length);
+        assert.deepEqual(
+            [command, ...Object.values(options)].map(val => val.toString()),
+            result.split(" "),
+        );
     });
 });
