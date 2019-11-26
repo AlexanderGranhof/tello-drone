@@ -24,12 +24,10 @@ const tello = require("tello-drone");
 // All option parameters are optional, default values shown
 const drone = tello.connect(
     {
-      async: false,             // makes the send method async.
       host: "192.168.10.1",     // manually set the host.
       port: "8889",             // manually set the port.
       statePort: "8890",        // manually set the state port.
       skipOK: false,            // dont send the OK message.
-      bufferOffset: 0           // buffer offset for dgram.
     }
 );
 
@@ -49,12 +47,9 @@ drone.on(event, callback)
  * message      - Fired when the drone sends a status message.   callback(message, udpConnection)
  */
 
-
-tello.DELAYS // All the rough delays for each command when in synchronous mode
-
 ```
 
-# Asynchronous example
+# Code example
 
 ```js
 const tello = require("tello-drone");
@@ -96,34 +91,6 @@ drone.on("connection", async () => {
 # Video demo
 
 [![Youtube video, broken :/](http://img.youtube.com/vi/pxh4rlVNd4E/0.jpg)](http://www.youtube.com/watch?v=pxh4rlVNd4E "NPM tello-drone v2.0.0 demo")
-
-# Synchronous example
-
-```js
-const tello = require("tello-drone");
-
-const drone = tello.connect();
-
-drone.on("connection", () => {
-    console.log("Connected to drone");
-});
-
-drone.on("state", state => {
-    console.log("Recieved State > ", state);
-});
-
-drone.on("send", (err, length) => {
-    if (err) console.log(err);
-
-    console.log(`Sent command is ${length} long`);
-});
-
-drone.on("message", message => {
-    console.log("Recieved Message > ", message);
-});
-
-drone.send("battery?");
-```
 
 ## Avaliable commands to send
 
