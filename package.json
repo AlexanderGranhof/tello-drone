@@ -26,5 +26,8 @@
         "eslint-plugin-import": "^2.18.2",
         "eslint-plugin-mocha": "^6.2.2",
         "mocha": "^6.2.2"
-    }
+    },
+    "files": [
+        "/lib"
+    ]
 }
