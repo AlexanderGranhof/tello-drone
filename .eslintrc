@@ -1,0 +1,26 @@
+{
+    "extends": [
+        "airbnb-base",
+        "plugin:mocha/recommended"
+    ],
+    "rules": {
+        "quotes": ["error", "double"],
+        "indent": ["error", 4],
+        "prefer-arrow-callback": 0,
+        "mocha/prefer-arrow-callback": 2
+    },
+    "plugins": [
+        "mocha"
+    ],
+    "env": {
+        "mocha": true
+    },
+    "overrides": [{
+        "files": ["test/*.js"],
+        "rules": {
+            "func-names": "off",
+            "object-curly-newline": "off",
+            "max-len": "off"
+        }
+    }]
+}
