@@ -3,7 +3,9 @@
     "version": "2.1.0",
     "description": "An independent package that provides a simple, easy to use interface between node.js and a tello drone",
     "main": "lib/index.js",
-    "scripts": {},
+    "scripts": {
+        "test": "mocha"
+    },
     "keywords": [
         "tello",
         "drone",
@@ -17,5 +19,8 @@
     "repository": {
         "type": "git",
         "url": "git://github.com/AlexanderGranhof/tello-drone"
+    },
+    "devDependencies": {
+        "mocha": "^6.2.2"
     }
 }
