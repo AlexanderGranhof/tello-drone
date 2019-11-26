@@ -3,12 +3,6 @@
         "airbnb-base",
         "plugin:mocha/recommended"
     ],
-    "rules": {
-        "quotes": ["error", "double"],
-        "indent": ["error", 4],
-        "prefer-arrow-callback": 0,
-        "mocha/prefer-arrow-callback": 2
-    },
     "plugins": [
         "mocha"
     ],
@@ -20,7 +14,23 @@
         "rules": {
             "func-names": "off",
             "object-curly-newline": "off",
-            "max-len": "off"
+            "max-len": "off",
+            "prefer-arrow-callback": 0,
+            "mocha/prefer-arrow-callback": 2,
+            "quotes": ["error", "double"],
+            "indent": ["error", 4]
+        }
+    },
+    {
+        "files": ["lib/**/*.js"],
+        "rules": {
+            "quotes": ["error", "double"],
+            "indent": ["error", 4],
+            "arrow-parens": "off",
+            "no-restricted-syntax": [ "off", "ForOfStatement" ],
+            "consistent-return": "off",
+            "max-len": ["error", 150],
+            "no-ternary": "off"
         }
     }]
 }
