@@ -6,6 +6,15 @@ Im a student learning how to work and publish packages on NPM. This is a simple 
 
 This project is currently a work in progress, but as of 1.0.1 it can communicate with a tello drone with the sample code bellow.
 
+## v3.0.0 Breaking changes
+- Package is now only async.
+- Removed offsetBuffer and async option from config.
+- Removed DELAYS attribute from the tello-data.json and the tello package.
+
+### v3.0.0 General changes
+- Replaced large sections of the code that could be replaced with native node modules, such as events and assert.
+- Added testing and linting
+
 ## Information
 
 The goal of this package is to provide an independent (no dependecies), simple and easy-to-use interface between nodejs and a tello drone. You can communicate with the drone asynchronously. When you connect to the drone it **automatically sends the 'command' command**, so that is not nececary.
