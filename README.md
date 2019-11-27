@@ -8,11 +8,11 @@ This project is currently a work in progress, but as of 1.0.1 it can communicate
 
 ## Information
 
-You can communicate with the drone synchronous or asynchronous. You can pass an option object to switch to asynchronous (synchronous by default). When you connect to the drone it **automatically sends the 'command' command**, so that is not nececary. If you are working with the drone synchronous, you need to wait for the OK message from the drone before you can send the next command.
+The goal of this package is to provide an independent (no dependecies), simple and easy-to-use interface between nodejs and a tello drone. You can communicate with the drone asynchronously. When you connect to the drone it **automatically sends the 'command' command**, so that is not nececary.
 
 ## Error handling
 
-The drone gives very minimal feedback on errors. Command verification is already built in, it will throw an error if a command is invalid.
+The drone gives no feedback on errors. Command verification is already built in, it will throw an error if a command is invalid.
 If you recieve back an error and the drone does not execute the command, the most common reason in my experience is low battery.
 Charging the battery and trying again solves that error issue.
 
@@ -54,7 +54,7 @@ drone.on(event, callback)
 ```js
 const tello = require("tello-drone");
 
-const drone = tello.connect({ async: true });
+const drone = tello.connect();
 
 drone.on("connection", () => {
     console.log("Connected to drone");
