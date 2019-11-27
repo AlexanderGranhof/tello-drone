@@ -1,10 +1,10 @@
 {
     "name": "tello-drone",
     "version": "2.1.0",
-    "description": "A package that wraps around dgram to create a easy to use interface between node.js and a tello drone",
-    "main": "index.js",
+    "description": "An independent package that provides a simple, easy to use interface between node.js and a tello drone",
+    "main": "lib/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "mocha"
     },
     "keywords": [
         "tello",
@@ -19,5 +19,15 @@
     "repository": {
         "type": "git",
         "url": "git://github.com/AlexanderGranhof/tello-drone"
-    }
+    },
+    "devDependencies": {
+        "eslint": "^6.7.1",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-mocha": "^6.2.2",
+        "mocha": "^6.2.2"
+    },
+    "files": [
+        "/lib"
+    ]
 }
