@@ -1,6 +1,6 @@
 {
     "name": "tello-drone",
-    "version": "3.0.3",
+    "version": "3.0.4",
     "description": "An independent package that provides a simple, easy to use interface between node.js and a tello drone",
     "main": "lib/index.js",
     "scripts": {
