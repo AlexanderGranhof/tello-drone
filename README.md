@@ -27,6 +27,10 @@ Charging the battery and trying again solves that error issue.
 
 ## Methods and options
 
+Note that all the parameters for a command needs to be an object as a second parameter to the send command. You can reference the tello documentation here to what parameters needs to go along with a specific command. Its important that the parameters in the object **needs to be in the same order** as in the tello documentation. For commands that only has a single value (usually x in the tello documentation) you only need to pass in an object such as `{ value: 60 }`.
+
+Below is a general description of all the parameters and events:
+
 ```js
 const tello = require("tello-drone");
 
