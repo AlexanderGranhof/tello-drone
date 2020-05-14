@@ -27,7 +27,7 @@
         }
     },
     {
-        "files": ["lib/**/*.js"],
+        "files": ["src/**/*.ts"],
         "rules": {
             "consistent-return": "off",
             "max-len": ["error", 150],
