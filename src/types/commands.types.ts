@@ -1,4 +1,5 @@
 export type ValidCommands =
+    "command" |
     "takeoff" |
     "land" |
     "streamon" |
