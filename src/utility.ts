@@ -39,7 +39,6 @@ export function verifyCommand(command: ValidCommands, options?: ValidCommandOpti
     if (hasGivenOptions) {
         const allRequiredOptions: string[] = Object.keys(currentCommandLimits);
         const givenOptionKeys = Object.keys(givenOptions);
-        const hasMinMax = givenOptionKeys.includes("min") || givenOptionKeys.includes("max");
         const commandValueIsEnum = Array.isArray(currentCommandLimits);
 
         // Check if we have any extra options that dont belong
@@ -50,15 +49,19 @@ export function verifyCommand(command: ValidCommands, options?: ValidCommandOpti
         }
 
         for (const [key, value] of Object.entries(givenOptions)) {
+            const optionsLimits = currentCommandLimits[key];
+            const optionLimitKeys = Object.keys(optionsLimits);
+            const hasMinMax = optionLimitKeys.includes("min") || optionLimitKeys.includes("max");
+
             // If we dont have an array (enum) or a min max property, something is not right
-            if (!hasMinMax && !commandValueIsEnum) {
-                return new Error(`Unexpected error with following parameters: ${[command, key, `[${Object.entries(givenOptions)}]`]}`);
+            if (optionsLimits === undefined) {
+                return new Error(`Unexpected error with following parameters: ${[command, key, `[${Object.entries(givenOptions)}]`]}, no option limits found`);
             }
 
             // Check if value is within min and max value
             if (hasMinMax) {
-                const max = currentCommandLimits.max;
-                const min = currentCommandLimits.min;
+                const max = optionsLimits.max;
+                const min = optionsLimits.min;
     
                 const hasExceeded = typeof max === "number" && value > max
                 const hasDeceed = typeof max === "number" && value < min
@@ -70,7 +73,7 @@ export function verifyCommand(command: ValidCommands, options?: ValidCommandOpti
             }
             
             // Check if the value is one of the enum
-            if (commandValueIsEnum && !currentCommandLimits.includes(value)) {
+            if (commandValueIsEnum && !optionsLimits.includes(value)) {
                 return new Error(`invalid value ${key}: ${value} expected [${currentCommandLimits.toString()}]`); 
             }
         }
