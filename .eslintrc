@@ -1,37 +1,55 @@
 {
+    "parser": "@typescript-eslint/parser",
     "extends": [
-        "airbnb-base",
-        "plugin:mocha/recommended"
-    ],
-    "plugins": [
-        "mocha"
+        "airbnb-base"
     ],
     "env": {
         "mocha": true
     },
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "rules": {
         "no-plusplus": "off",
         "arrow-parens": "off",
-        "quotes": ["error", "double"],
-        "indent": ["error", 4],
-        "no-restricted-syntax": [ "off", "ForOfStatement" ]
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "indent": [
+            "error",
+            4
+        ],
+        "no-restricted-syntax": [
+            "off",
+            "ForOfStatement"
+        ]
     },
-    "overrides": [{
-        "files": ["test/*.js"],
-        "rules": {
-            "func-names": "off",
-            "object-curly-newline": "off",
-            "max-len": "off",
-            "prefer-arrow-callback": 0,
-            "mocha/prefer-arrow-callback": 2
+    "overrides": [
+        {
+            "files": [
+                "test/*.js"
+            ],
+            "rules": {
+                "func-names": "off",
+                "object-curly-newline": "off",
+                "max-len": "off",
+                "prefer-arrow-callback": 0,
+                "mocha/prefer-arrow-callback": 2
+            }
+        },
+        {
+            "files": [
+                "src/**/*.ts"
+            ],
+            "rules": {
+                "consistent-return": "off",
+                "max-len": [
+                    "error",
+                    150
+                ],
+                "no-ternary": "off"
+            }
         }
-    },
-    {
-        "files": ["src/**/*.ts"],
-        "rules": {
-            "consistent-return": "off",
-            "max-len": ["error", 150],
-            "no-ternary": "off"
-        }
-    }]
+    ]
 }
