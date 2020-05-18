@@ -6,6 +6,9 @@ Im a student learning how to work and publish packages on NPM. This is a simple 
 
 This project is currently a work in progress, but as of 1.0.1 it can communicate with a tello drone with the sample code bellow.
 
+## Changelog
+You can see the latest changes in the **CHANGELOG.md** file in the root of this repository
+
 ## v3.0.0 Breaking changes
 - Package is now only async.
 - Removed offsetBuffer and async option from config.
