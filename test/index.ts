@@ -1,5 +1,6 @@
 const assert = require("assert").strict;
-const { parseDroneState, verifyCommand, formatCommand } = require("../lib/utility");
+import { verifyCommand, parseDroneState, formatCommand } from "../src/utility";
+import { ValidCommands } from "../src/types/commands.types";
 
 describe("tello-drone library", function () {
     it("Can parse a tello state (v???)", function () {
@@ -28,14 +29,14 @@ describe("tello-drone library", function () {
         const options = [{ value: 200 }, { value: 50 }, { value: 180 }, { value: "r" }, { x1: 250, y1: 100, x2: 100, y2: 50, speed: 30 }];
 
         for (const command of noOptionCommands) {
-            assert.equal(verifyCommand(command), undefined);
+            assert.equal(verifyCommand(command as ValidCommands), undefined);
         }
 
         for (let i = 0; i < optionCommands.length; i++) {
             const command = optionCommands[i];
             const option = options[i];
 
-            assert.equal(verifyCommand(command, option), undefined);
+            assert.equal(verifyCommand(command as ValidCommands, option), undefined);
         }
 
         // Invalid commands / args
@@ -44,6 +45,7 @@ describe("tello-drone library", function () {
         const invalidOptions = [{ value: 2000 }, { value: 5000 }, { value: 18000 }, { value: "j" }, { x1: 25000, y1: 10000, x2: 10000, y2: 5000, speed: 3000 }];
 
         for (const command of invalidNoOptionCommands) {
+            // @ts-ignore we are intentionally failing
             assert.equal(verifyCommand(command) instanceof Error, true);
         }
 
@@ -51,6 +53,7 @@ describe("tello-drone library", function () {
             const command = optionCommands[i];
             const option = invalidOptions[i];
 
+            // @ts-ignore we are intentionally failing
             assert.equal(verifyCommand(command, option) instanceof Error, true);
         }
     });
