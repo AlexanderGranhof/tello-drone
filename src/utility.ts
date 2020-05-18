@@ -97,13 +97,13 @@ export function parseDroneState(state: Buffer | string) {
             formattedValue = Number.isNaN(parseFloat(value)) ? value : parseFloat(value);
         }
 
-        return { ...finalDataObject, [key]: formattedValue || value };
+        return { ...finalDataObject, [key]: formattedValue === undefined ? value : formattedValue };
     };
 
     return stringState.split(";").reduce(reducer, {});
 }
 
-function formatCommand(command: ValidCommands, options: ValidCommandOptions) {
+export function formatCommand(command: ValidCommands, options: ValidCommandOptions) {
     let formattedCommand = command;
 
     for (const value of Object.values(options)) {
