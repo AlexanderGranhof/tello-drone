@@ -1,4 +1,16 @@
 import { AddressInfo } from "net";
+import { EventEmitter } from "events";
+import dgram from "dgram";
+
+export interface TelloDrone {
+    HOST: string;
+    MAIN_PORT: number;
+    STATE_PORT: number;
+    droneIO: dgram.Socket;
+    droneState: dgram.Socket;
+    connected: boolean;
+    events: EventEmitter;
+}
 
 export interface DroneState {
     pitch: number, 
@@ -19,6 +31,13 @@ export interface DroneState {
     agz: number
 };
 
+export interface DroneOptions {
+    host: string;
+    port: number;
+    statePort: number;
+    skipOk: boolean;
+}
+
 export interface DroneEvents {
     connection: () => void;
     state: (state: DroneState, udpConnection: AddressInfo) => void;
@@ -27,7 +46,4 @@ export interface DroneEvents {
 }
 
 // https://www.typescriptlang.org/docs/handbook/generics.html
-export interface DroneEventEmitter<T> {
-    on<K extends keyof T>(event: K, callback: T[K]): void;
-}
-
+export type DroneEventEmitter = <K extends keyof DroneEvents>(event: K, callback: DroneEvents[K]) => void
