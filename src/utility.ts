@@ -52,7 +52,7 @@ export function verifyCommand(command: ValidCommands, options?: ValidCommandOpti
         for (const [key, value] of Object.entries(givenOptions)) {
             // If we dont have an array (enum) or a min max property, something is not right
             if (!hasMinMax && !commandValueIsEnum) {
-                return new Error(`Unexpected error with following parameters: ${[command, key, givenOptions]}`);
+                return new Error(`Unexpected error with following parameters: ${[command, key, `[${Object.entries(givenOptions)}]`]}`);
             }
 
             // Check if value is within min and max value
