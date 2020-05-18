@@ -24,9 +24,7 @@ export type ValidCommands =
     "time?" |
     "wifi?" |
     "sdk?" |
-    "sn?"
-    ;
-
+    "sn?";
 export interface ValidCommandOptions {
     value?: number | string,
     x?: number,
