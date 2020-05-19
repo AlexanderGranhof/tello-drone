@@ -2,7 +2,7 @@
     "name": "tello-drone",
     "version": "3.0.4",
     "description": "An independent package that provides a simple, easy to use interface between node.js and a tello drone",
-    "main": "lib/index.js",
+    "main": "lib/drone.js",
     "scripts": {
         "test": "mocha -r ts-node/register test/**/*.ts",
         "lint": "eslint src/**/*.ts",
