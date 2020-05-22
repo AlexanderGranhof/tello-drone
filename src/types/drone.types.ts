@@ -13,22 +13,22 @@ export interface TelloDrone {
 }
 
 export interface DroneState {
-    pitch: number,
-    roll: number,
-    yaw: number,
-    vgx: number,
-    vgy: number,
-    vgz: number,
-    templ: number,
-    temph: number,
-    tof: number,
-    h: number,
-    bat: number,
-    baro: number,
-    time: number,
-    agx: number,
-    agy: number,
-    agz: number
+    pitch: number;
+    roll: number;
+    yaw: number;
+    vgx: number;
+    vgy: number;
+    vgz: number;
+    templ: number;
+    temph: number;
+    tof: number;
+    h: number;
+    bat: number;
+    baro: number;
+    time: number;
+    agx: number;
+    agy: number;
+    agz: number;
 }
 
 export interface DroneOptions {
@@ -41,7 +41,7 @@ export interface DroneOptions {
 export interface DroneEvents {
     connection: () => void;
     state: (state: DroneState, udpConnection: AddressInfo) => void;
-    send: (error: Error, messageLength: Number) => void;
+    send: (error: Error, messageLength: number) => void;
     message: (message: string, udpConnection: AddressInfo) => void;
 }
 

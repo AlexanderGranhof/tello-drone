@@ -17,7 +17,7 @@ class Drone {
         host: "192.168.10.1",
         port: 8889,
         statePort: 8890,
-        skipOk: true
+        skipOk: true,
     }) {
         /*
             Leaving these asserts out for now, since changing the ports from string to number
@@ -38,13 +38,13 @@ class Drone {
 
         this.droneIO.bind(this.MAIN_PORT);
         this.droneState.bind(this.STATE_PORT);
-        
+
         this.connected = false;
 
         this.events = new EventEmitter();
 
         this.droneState.on("message", stateBuffer => {
-            this.events.emit("state", parseDroneState(stateBuffer))
+            this.events.emit("state", parseDroneState(stateBuffer));
         });
 
         this.droneIO.on("message", (...args) => {
@@ -69,7 +69,7 @@ class Drone {
         setTimeout(() => this.send("command"));
     }
 
-    send(command: ValidCommands, options?: ValidCommandOptions, force: boolean = false) {
+    send(command: ValidCommands, options?: ValidCommandOptions, force = false) {
         const error = verifyCommand(command, options);
         let formattedCommand = command;
 
@@ -102,7 +102,7 @@ class Drone {
     }
 
     forceSend(command: ValidCommands, options: ValidCommandOptions) {
-        this.send.call(this, command, options)
+        this.send.call(this, command, options);
     }
 
     on: DroneEventEmitter = (event, callback) => {
