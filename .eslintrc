@@ -1,8 +1,22 @@
 {
     "parser": "@typescript-eslint/parser",
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        }
+    },
     "env": {
         "mocha": true
     },
@@ -10,8 +24,13 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "max-classes-per-file": "off",
+        "lines-between-class-members": "off",
+        "class-methods-use-this": "off",
+        "import/extensions": "off",
         "no-plusplus": "off",
         "arrow-parens": "off",
+        "@typescript-eslint/ban-ts-ignore": "off",
         "quotes": [
             "error",
             "double"
@@ -28,14 +47,14 @@
     "overrides": [
         {
             "files": [
-                "test/*.js"
+                "test/*.ts"
             ],
             "rules": {
                 "func-names": "off",
                 "object-curly-newline": "off",
                 "max-len": "off",
-                "prefer-arrow-callback": 0,
-                "mocha/prefer-arrow-callback": 2
+                "prefer-arrow-callback": "off",
+                "mocha/prefer-arrow-callback": "off"
             }
         },
         {
