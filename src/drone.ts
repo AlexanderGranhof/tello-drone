@@ -13,12 +13,7 @@ class Drone {
     connected: boolean;
     events: EventEmitter;
 
-    constructor(options: DroneOptions = {
-        host: "192.168.10.1",
-        port: 8889,
-        statePort: 8890,
-        skipOk: true,
-    }) {
+    constructor(options: DroneOptions) {
         /*
             Leaving these asserts out for now, since changing the ports from string to number
             as per following the dgram docs, it will cause errors. Right now the goal is to port JS to TS
@@ -29,9 +24,19 @@ class Drone {
         // assert.equal(typeof options.statePort, "number");
         // assert.equal(typeof options.skipOk, "boolean");
 
-        this.HOST = options.host;
-        this.MAIN_PORT = options.port;
-        this.STATE_PORT = options.statePort;
+        const defaultOptions = {
+            host: "192.168.10.1",
+            port: 8889,
+            statePort: 8890,
+            skipOk: true,
+        };
+        const {
+            host, port, statePort, skipOk,
+        } = { ...defaultOptions, ...options };
+
+        this.HOST = host;
+        this.MAIN_PORT = port;
+        this.STATE_PORT = statePort;
 
         this.droneIO = dgram.createSocket("udp4");
         this.droneState = dgram.createSocket("udp4");
@@ -62,7 +67,7 @@ class Drone {
                 this.events.emit("connection");
             }
 
-            if (!options.skipOk) this.events.emit("message", parsedMessage);
+            if (!skipOk) this.events.emit("message", parsedMessage);
         });
 
         // Add a minor delay so that the events can be attached first
