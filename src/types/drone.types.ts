@@ -32,10 +32,10 @@ export interface DroneState {
 }
 
 export interface DroneOptions {
-    host: string;
-    port: number;
-    statePort: number;
-    skipOk: boolean;
+    host?: string;
+    port?: number;
+    statePort?: number;
+    skipOk?: boolean;
 }
 
 export interface DroneEvents {
