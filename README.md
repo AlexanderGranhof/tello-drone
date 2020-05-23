@@ -35,17 +35,15 @@ Note that all the parameters for a command needs to be an object as a second par
 Below is a general description of all the parameters and events:
 
 ```js
-const tello = require("tello-drone");
+const Tello = require("tello-drone");
 
 // All option parameters are optional, default values shown
-const drone = tello.connect(
-    {
+const drone = new Tello({
       host: "192.168.10.1",     // manually set the host.
       port: "8889",             // manually set the port.
       statePort: "8890",        // manually set the state port.
       skipOK: false,            // dont send the OK message.
-    }
-);
+})
 
 // Sends a command to the drone
 drone.send("battery?")
@@ -68,9 +66,9 @@ drone.on(event, callback)
 # Code example
 
 ```js
-const tello = require("tello-drone");
+const Tello = require("tello-drone");
 
-const drone = tello.connect();
+const drone = new Tello();
 
 drone.on("connection", () => {
     console.log("Connected to drone");
