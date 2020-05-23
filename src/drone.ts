@@ -53,7 +53,7 @@ class Drone {
         });
 
         this.droneIO.on("message", (...args) => {
-            const messageBuffer = [args];
+            const [messageBuffer] = args;
             const parsedMessage = Buffer.isBuffer(messageBuffer) ? messageBuffer.toString() : messageBuffer;
 
             if (parsedMessage !== "ok") {
