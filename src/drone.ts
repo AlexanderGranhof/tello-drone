@@ -74,7 +74,7 @@ class Drone {
         setTimeout(() => this.send("command"));
     }
 
-    send(command: ValidCommands, options?: ValidCommandOptions, force = false) {
+    send(command: ValidCommands, options?: ValidCommandOptions, force = false): Promise<void> {
         const error = verifyCommand(command, options);
         let formattedCommand = command;
 
@@ -107,7 +107,7 @@ class Drone {
     }
 
     forceSend(command: ValidCommands, options: ValidCommandOptions) {
-        this.send.call(this, command, options);
+        return this.send.call(this, command, options, true);
     }
 
     on: DroneEventEmitter = (event, callback) => {
