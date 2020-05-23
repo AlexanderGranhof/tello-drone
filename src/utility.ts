@@ -5,7 +5,7 @@ import { ValidCommands, ValidCommandOptions } from "./types/commands.types";
 const limits = Object.keys(commandLimits);
 const commands = [...validCommands.control, ...validCommands.read, ...validCommands.set];
 
-export function verifyCommand(command: ValidCommands, options?: ValidCommandOptions) {
+export function verifyCommand(command: ValidCommands, options?: ValidCommandOptions): Error | void {
     assert.strictEqual(typeof command, "string");
 
     const givenOptions = options || {};
@@ -27,7 +27,7 @@ export function verifyCommand(command: ValidCommands, options?: ValidCommandOpti
     if (commandRequiresOptions) {
         const allRequiredOptions: string[] = Object.keys(currentCommandLimits);
         const givenOptionKeys = Object.keys(givenOptions);
-        
+
         // Check if we are missing any options
         for (const option of allRequiredOptions) {
             if (!givenOptionKeys.includes(option)) {
@@ -60,35 +60,34 @@ export function verifyCommand(command: ValidCommands, options?: ValidCommandOpti
 
             // Check if value is within min and max value
             if (hasMinMax) {
-                const max = optionsLimits.max;
-                const min = optionsLimits.min;
-    
-                const hasExceeded = typeof max === "number" && value > max
-                const hasDeceed = typeof max === "number" && value < min
-    
-                if (hasExceeded || hasDeceed) {
-                    return new Error(`invalid value ${key}: ${value}, expected ${key} to range between ${min}, ${max}`)
-                }
+                const { max } = optionsLimits;
+                const { min } = optionsLimits;
 
+                const hasExceeded = typeof max === "number" && value > max;
+                const hasDeceed = typeof max === "number" && value < min;
+
+                if (hasExceeded || hasDeceed) {
+                    return new Error(`invalid value ${key}: ${value}, expected ${key} to range between ${min}, ${max}`);
+                }
             }
-            
+
             // Check if the value is one of the enum
             if (commandValueIsEnum && !optionsLimits.includes(value)) {
-                return new Error(`invalid value ${key}: ${value} expected [${currentCommandLimits.toString()}]`); 
+                return new Error(`invalid value ${key}: ${value} expected [${currentCommandLimits.toString()}]`);
             }
         }
     }
 }
 
-export function parseDroneState(state: Buffer | string) {
+export function parseDroneState(state: Buffer | string): object {
     const stringState = Buffer.isBuffer(state) ? state.toString() : state;
 
-    const reducer = (finalDataObject: object, nextDataPoint: string) => {
+    const reducer = (finalDataObject: object, nextDataPoint: string): object => {
         if (!nextDataPoint.includes(":")) {
             return finalDataObject;
         }
 
-        let [key, value] = nextDataPoint.split(":");
+        const [key, value] = nextDataPoint.split(":");
         let formattedValue;
         const isCommaSeperated = value.includes(",");
 
@@ -106,7 +105,7 @@ export function parseDroneState(state: Buffer | string) {
     return stringState.split(";").reduce(reducer, {});
 }
 
-export function formatCommand(command: ValidCommands, options: ValidCommandOptions) {
+export function formatCommand(command: ValidCommands, options: ValidCommandOptions): string {
     let formattedCommand = command;
 
     for (const value of Object.values(options)) {
