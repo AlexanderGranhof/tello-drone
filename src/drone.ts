@@ -13,7 +13,7 @@ class Drone {
     connected: boolean;
     events: EventEmitter;
 
-    constructor(options: DroneOptions) {
+    constructor(options?: DroneOptions) {
         /*
             Leaving these asserts out for now, since changing the ports from string to number
             as per following the dgram docs, it will cause errors. Right now the goal is to port JS to TS
