@@ -30,6 +30,8 @@
         "import/extensions": "off",
         "no-plusplus": "off",
         "arrow-parens": "off",
+        "consistent-return": "off",
+        "max-len": "warn",
         "@typescript-eslint/ban-ts-ignore": "off",
         "quotes": [
             "error",
@@ -55,19 +57,6 @@
                 "max-len": "off",
                 "prefer-arrow-callback": "off",
                 "mocha/prefer-arrow-callback": "off"
-            }
-        },
-        {
-            "files": [
-                "src/**/*.ts"
-            ],
-            "rules": {
-                "consistent-return": "off",
-                "max-len": [
-                    "error",
-                    150
-                ],
-                "no-ternary": "off"
             }
         }
     ]
