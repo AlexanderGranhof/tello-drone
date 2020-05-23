@@ -1,11 +1,13 @@
 {
     "name": "tello-drone",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "description": "An independent package that provides a simple, easy to use interface between node.js and a tello drone",
-    "main": "lib/index.js",
+    "main": "lib/drone.js",
     "scripts": {
-        "test": "mocha",
-        "lint": "eslint lib"
+        "test": "mocha -r ts-node/register test/**/*.ts",
+        "lint": "eslint src/**/*.ts",
+        "lint:fix": "eslint src/**/*.ts --fix",
+        "build": "tsc"
     },
     "keywords": [
         "tello",
@@ -22,13 +24,18 @@
         "url": "git://github.com/AlexanderGranhof/tello-drone"
     },
     "devDependencies": {
+        "@types/mocha": "^7.0.2",
+        "@types/node": "^14.0.1",
+        "@typescript-eslint/eslint-plugin": "^2.33.0",
         "eslint": "^6.7.1",
-        "eslint-config-airbnb-base": "^14.0.0",
-        "eslint-plugin-import": "^2.18.2",
-        "eslint-plugin-mocha": "^6.2.2",
-        "mocha": "^6.2.2"
+        "eslint-config-airbnb-typescript": "^7.2.1",
+        "eslint-plugin-import": "^2.20.2",
+        "mocha": "^7.1.2",
+        "ts-node": "^8.10.1",
+        "typescript": "^3.9.2"
     },
     "files": [
         "/lib"
-    ]
+    ],
+    "dependencies": {}
 }

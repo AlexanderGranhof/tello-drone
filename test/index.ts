@@ -1,5 +1,6 @@
-const assert = require("assert").strict;
-const { parseDroneState, verifyCommand, formatCommand } = require("../lib/utility");
+import { strict as assert } from "assert";
+import { verifyCommand, parseDroneState, formatCommand } from "../src/utility";
+import { ValidCommands } from "../src/types/commands.types";
 
 describe("tello-drone library", function () {
     it("Can parse a tello state (v???)", function () {
@@ -20,37 +21,37 @@ describe("tello-drone library", function () {
         assert.deepEqual(expected, actual);
     });
 
-    it("Can verify valid and invalid commands", function () {
-        // Valid commands / options
-
+    it("Can verify valid commands", function () {
         const noOptionCommands = ["command", "takeoff", "land", "streamon"];
         const optionCommands = ["up", "down", "ccw", "flip", "curve"];
-        const options = [{ value: 200 }, { value: 50 }, { value: 180 }, { value: "r" }, { x1: 250, y1: 100, x2: 100, y2: 50, speed: 30 }];
+        const options = [{ value: 200 }, { value: 50 }, { value: 180 }, { value: "r" }, { x1: 250, y1: 100, z1: 100, x2: 100, y2: 50, z2: 50, speed: 30 }];
 
         for (const command of noOptionCommands) {
-            assert.equal(verifyCommand(command), undefined);
+            assert.equal(verifyCommand(command as ValidCommands), undefined);
         }
 
         for (let i = 0; i < optionCommands.length; i++) {
             const command = optionCommands[i];
             const option = options[i];
 
-            assert.equal(verifyCommand(command, option), undefined);
+            assert.equal(verifyCommand(command as ValidCommands, option), undefined);
         }
+    });
 
-        // Invalid commands / args
-
+    it("Can verify invalid commands", function () {
         const invalidNoOptionCommands = ["im", "not", "a", "validCommand"];
         const invalidOptions = [{ value: 2000 }, { value: 5000 }, { value: 18000 }, { value: "j" }, { x1: 25000, y1: 10000, x2: 10000, y2: 5000, speed: 3000 }];
 
         for (const command of invalidNoOptionCommands) {
+            // @ts-ignore we are intentionally failing
             assert.equal(verifyCommand(command) instanceof Error, true);
         }
 
-        for (let i = 0; i < optionCommands.length; i++) {
-            const command = optionCommands[i];
+        for (let i = 0; i < invalidNoOptionCommands.length; i++) {
+            const command = invalidNoOptionCommands[i];
             const option = invalidOptions[i];
 
+            // @ts-ignore we are intentionally failing
             assert.equal(verifyCommand(command, option) instanceof Error, true);
         }
     });

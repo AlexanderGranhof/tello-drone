@@ -1,37 +1,63 @@
 {
+    "parser": "@typescript-eslint/parser",
     "extends": [
         "airbnb-base",
-        "plugin:mocha/recommended"
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
-    "plugins": [
-        "mocha"
-    ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        }
+    },
     "env": {
         "mocha": true
     },
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "rules": {
+        "max-classes-per-file": "off",
+        "lines-between-class-members": "off",
+        "class-methods-use-this": "off",
+        "import/extensions": "off",
         "no-plusplus": "off",
         "arrow-parens": "off",
-        "quotes": ["error", "double"],
-        "indent": ["error", 4],
-        "no-restricted-syntax": [ "off", "ForOfStatement" ]
+        "consistent-return": "off",
+        "max-len": "warn",
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "indent": [
+            "error",
+            4
+        ],
+        "no-restricted-syntax": [
+            "off",
+            "ForOfStatement"
+        ]
     },
-    "overrides": [{
-        "files": ["test/*.js"],
-        "rules": {
-            "func-names": "off",
-            "object-curly-newline": "off",
-            "max-len": "off",
-            "prefer-arrow-callback": 0,
-            "mocha/prefer-arrow-callback": 2
+    "overrides": [
+        {
+            "files": [
+                "test/*.ts"
+            ],
+            "rules": {
+                "func-names": "off",
+                "object-curly-newline": "off",
+                "max-len": "off",
+                "prefer-arrow-callback": "off",
+                "mocha/prefer-arrow-callback": "off"
+            }
         }
-    },
-    {
-        "files": ["lib/**/*.js"],
-        "rules": {
-            "consistent-return": "off",
-            "max-len": ["error", 150],
-            "no-ternary": "off"
-        }
-    }]
+    ]
 }
