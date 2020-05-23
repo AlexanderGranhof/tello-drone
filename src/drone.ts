@@ -76,7 +76,7 @@ class Drone {
 
     send(command: ValidCommands, options?: ValidCommandOptions, force = false): Promise<void> {
         const error = verifyCommand(command, options);
-        let formattedCommand = command;
+        let formattedCommand: string = command;
 
         if (options) {
             formattedCommand = formatCommand(command, options);
