@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [3.0.5] - 2020-05-23
 
 ### Changed
 - ported the repo from JS to TS
